@@ -1,0 +1,29 @@
+# app.yaml
+# 目的：Google App Engine への デプロイ設定
+# Python 3.12 ランタイムを使用してアプリケーションを起動
+
+runtime: python312
+
+# 環境変数の設定
+env_variables:
+  # Flask の起動モード
+  FLASK_ENV: "production"
+  
+  # Cloud SQL への接続情報
+  DB_USER: "root"
+  DB_HOST: "127.0.0.1:3306"  # Cloud SQL Proxy 経由での接続
+  DB_NAME: "myapp_db"
+  # DB_PASSWORD と SECRET_KEY は環境変数で設定（ここには書かない）
+
+# Cloud SQL インスタンスへの接続設定
+cloud_sql_instances:
+  - "fast-circle-487006-d4:asia-northeast1:free-trial-second-project"
+
+# 自動スケーリング設定
+automatic_scaling:
+  min_instances: 1
+  max_instances: 5
+
+# リクエストタイムアウト
+env_variables:
+  CLOUD_RUN_TIMEOUT: 540
